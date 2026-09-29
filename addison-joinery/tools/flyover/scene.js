@@ -465,7 +465,6 @@ async function main() {
     composer.render();
     return renderer.domElement.toDataURL('image/png');
   };
-  window.__dbg = { renderer, composer, scene, camera, THREE };
   status(`ready in ${((performance.now() - t0) / 1000).toFixed(1)}s`);
   window.sceneReady = true;
 }
