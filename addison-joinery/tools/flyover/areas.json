@@ -1,0 +1,42 @@
+{
+  "extent": 7000,
+  "terrain": { "step": 8, "exaggeration": 1.5 },
+  "waterY": -4,
+  "areas": [
+    {
+      "id": "inner-west",
+      "name": "Inner West",
+      "suburbs": ["St Peters", "Marrickville", "Newtown", "Sydenham"],
+      "camera": { "path": [[151.1745, -33.9165], [151.1796, -33.9101]], "pitch": 33, "dist": 1000, "yaw": 0 },
+      "sun": [288, 22]
+    },
+    {
+      "id": "sydney-cbd",
+      "name": "Sydney CBD",
+      "suburbs": ["CBD", "Barangaroo", "Darling Harbour", "Pyrmont"],
+      "camera": { "path": [[151.2062, -33.8745], [151.2065, -33.8669]], "pitch": 31, "dist": 1050, "yaw": 90 },
+      "sun": [330, 24]
+    },
+    {
+      "id": "eastern-suburbs",
+      "name": "Eastern Suburbs",
+      "suburbs": ["Double Bay", "Point Piper", "Rose Bay", "Vaucluse"],
+      "camera": { "path": [[151.2445, -33.8715], [151.2536, -33.8703]], "pitch": 30, "dist": 1050, "yaw": 90 },
+      "sun": [262, 20]
+    },
+    {
+      "id": "lower-north-shore",
+      "name": "Lower North Shore",
+      "suburbs": ["Mosman", "Cremorne", "Neutral Bay", "Kirribilli"],
+      "camera": { "path": [[151.2215, -33.8445], [151.2304, -33.8426]], "pitch": 30, "dist": 1050, "yaw": -90 },
+      "sun": [292, 19]
+    },
+    {
+      "id": "northern-beaches",
+      "name": "Northern Beaches",
+      "suburbs": ["Manly", "Fairlight", "Balgowlah", "Queenscliff"],
+      "camera": { "path": [[151.2790, -33.8050], [151.2847, -33.7989]], "pitch": 33, "dist": 1000, "yaw": 0 },
+      "sun": [288, 21]
+    }
+  ]
+}

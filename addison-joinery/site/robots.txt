@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://addisonjoinery.com.au/sitemap.xml

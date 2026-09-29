@@ -1,0 +1,5 @@
+# flyover render pipeline: dependencies, downloaded map data, masters, logs
+tools/flyover/node_modules/
+tools/flyover/.cache/
+tools/flyover/*.log
+tools/flyover/.*.log
