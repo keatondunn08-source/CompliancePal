@@ -18,6 +18,7 @@ const OUT_VIDEO = path.join(SITE, 'assets/video');
 const OUT_POSTER = path.join(SITE, 'assets/img/flyover');
 const MASTERS = path.join(ROOT, '.cache/masters');
 const PREVIEWS = path.join(ROOT, '.cache/preview');
+const TMP = path.join(ROOT, '.cache/tmp');
 
 const argv = Object.fromEntries(process.argv.slice(2).map((a) => {
   const [k, v] = a.replace(/^--/, '').split('=');
@@ -113,27 +114,36 @@ async function render(browser, base) {
   }
 }
 
+// Encode into the cache, then rename into site/ so the deploy folder never
+// holds a half-written file (mid-encode commits/deploys would ship truncated video).
+async function encodeTo(dir, name, args) {
+  const tmp = path.join(TMP, name);
+  await ffmpeg([...args, tmp]);
+  fs.renameSync(tmp, path.join(dir, name));
+}
+
 async function encode(id) {
-  fs.mkdirSync(OUT_VIDEO, { recursive: true });
-  fs.mkdirSync(OUT_POSTER, { recursive: true });
+  for (const dir of [OUT_VIDEO, OUT_POSTER, TMP]) fs.mkdirSync(dir, { recursive: true });
   const land = path.join(MASTERS, `${id}-landscape.mp4`);
   const port = path.join(MASTERS, `${id}-portrait.mp4`);
   const x264 = ['-c:v', 'libx264', '-profile:v', 'high', '-preset', 'slow', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-an'];
   const vp9 = ['-c:v', 'libvpx-vp9', '-b:v', '0', '-row-mt', '1', '-deadline', 'good', '-cpu-used', '2', '-pix_fmt', 'yuv420p', '-an'];
+  const webp = (q) => ['-c:v', 'libwebp', '-quality', String(q)];
   if (orients.includes('landscape') && fs.existsSync(land)) {
     console.log(`  encoding ${id} landscape`);
-    await ffmpeg(['-i', land, '-vf', 'scale=1920:1080:flags=lanczos', ...x264, '-crf', '24', path.join(OUT_VIDEO, `${id}-1080.mp4`)]);
-    await ffmpeg(['-i', land, '-vf', 'scale=1920:1080:flags=lanczos', ...vp9, '-crf', '37', path.join(OUT_VIDEO, `${id}-1080.webm`)]);
-    await ffmpeg(['-i', land, '-vf', 'scale=1280:720:flags=lanczos', ...x264, '-crf', '25', path.join(OUT_VIDEO, `${id}-720.mp4`)]);
-    await ffmpeg(['-i', land, '-vf', 'scale=1280:720:flags=lanczos', ...vp9, '-crf', '38', path.join(OUT_VIDEO, `${id}-720.webm`)]);
-    await ffmpeg(['-i', land, '-frames:v', '1', '-vf', 'scale=1920:1080:flags=lanczos', '-c:v', 'libwebp', '-quality', '72', path.join(OUT_POSTER, `${id}.webp`)]);
-    await ffmpeg(['-ss', String(SECONDS / 2), '-i', land, '-frames:v', '1', '-vf', 'scale=889:500:flags=lanczos,crop=800:500', '-c:v', 'libwebp', '-quality', '70', path.join(OUT_POSTER, `${id}-card.webp`)]);
+    await encodeTo(OUT_VIDEO, `${id}-1080.mp4`, ['-i', land, '-vf', 'scale=1920:1080:flags=lanczos', ...x264, '-crf', '24']);
+    await encodeTo(OUT_VIDEO, `${id}-1080.webm`, ['-i', land, '-vf', 'scale=1920:1080:flags=lanczos', ...vp9, '-crf', '37']);
+    await encodeTo(OUT_VIDEO, `${id}-720.mp4`, ['-i', land, '-vf', 'scale=1280:720:flags=lanczos', ...x264, '-crf', '25']);
+    await encodeTo(OUT_VIDEO, `${id}-720.webm`, ['-i', land, '-vf', 'scale=1280:720:flags=lanczos', ...vp9, '-crf', '38']);
+    await encodeTo(OUT_POSTER, `${id}.webp`, ['-i', land, '-frames:v', '1', '-vf', 'scale=1920:1080:flags=lanczos', ...webp(72)]);
+    await encodeTo(OUT_POSTER, `${id}-card.webp`, ['-ss', String(SECONDS / 2), '-i', land, '-frames:v', '1',
+      '-vf', 'scale=889:500:flags=lanczos,crop=800:500', ...webp(70)]);
   }
   if (orients.includes('portrait') && fs.existsSync(port)) {
     console.log(`  encoding ${id} portrait`);
-    await ffmpeg(['-i', port, ...x264, '-crf', '25', path.join(OUT_VIDEO, `${id}-portrait.mp4`)]);
-    await ffmpeg(['-i', port, ...vp9, '-crf', '38', path.join(OUT_VIDEO, `${id}-portrait.webm`)]);
-    await ffmpeg(['-i', port, '-frames:v', '1', '-c:v', 'libwebp', '-quality', '72', path.join(OUT_POSTER, `${id}-portrait.webp`)]);
+    await encodeTo(OUT_VIDEO, `${id}-portrait.mp4`, ['-i', port, ...x264, '-crf', '25']);
+    await encodeTo(OUT_VIDEO, `${id}-portrait.webm`, ['-i', port, ...vp9, '-crf', '38']);
+    await encodeTo(OUT_POSTER, `${id}-portrait.webp`, ['-i', port, '-frames:v', '1', ...webp(72)]);
   }
 }
 
