@@ -1,0 +1,64 @@
+{
+  "provider": {
+    "businessName": "[YOUR BUSINESS NAME]",
+    "contactName": "Keaton Dunn",
+    "abn": "[YOUR ABN]",
+    "email": "[YOUR EMAIL]",
+    "phone": "[YOUR PHONE]",
+    "gst": "none",
+    "bank": {
+      "accountName": "[ACCOUNT NAME]",
+      "bsb": "[BSB]",
+      "accountNumber": "[ACCOUNT NUMBER]"
+    }
+  },
+  "client": {
+    "legalName": "Cosmo Lighting (On the Parade) Pty Limited",
+    "tradingName": "Cosmo Lighting Kensington",
+    "abn": "37 147 999 184",
+    "contactName": "Effie Santini",
+    "email": "kensington@cosmogroup.com.au",
+    "phone": "(02) 9662 1517",
+    "address": ["91–93 Anzac Parade", "Kensington NSW 2033"]
+  },
+  "suppliers": ["Oz Lighting", "Lighting Outlet"],
+  "agreement": {
+    "reference": "CLK-001",
+    "date": "2026-10-10",
+    "offerValidDays": 30,
+    "hostingIncludedMonths": 12,
+    "governingState": "New South Wales"
+  },
+  "invoice": {
+    "number": "INV-CLK-001",
+    "date": "2026-10-10",
+    "depositPercent": 50,
+    "depositDueDays": 7
+  },
+  "carePlan": {
+    "monthly": 50,
+    "annual": 500
+  },
+  "lineItems": [
+    {
+      "name": "Signature Website Package",
+      "invoiceDetail": "Full website rebuild. Existing Shopify checkout and payment methods retained. Website hosting included.",
+      "fee": 1200
+    },
+    {
+      "name": "Supplier Sync Agent",
+      "invoiceDetail": "Live pricing, product range and stock status from Oz Lighting and Lighting Outlet, with freight costs built into your pricing rules.",
+      "fee": 500
+    },
+    {
+      "name": "Postcode Shipping Calculator",
+      "invoiceDetail": "Australia Post delivery cost calculated automatically from the customer’s postcode.",
+      "fee": 0
+    },
+    {
+      "name": "Google Business Profile Optimisation",
+      "invoiceDetail": "Full review and update of your Google Business Profile.",
+      "fee": 200
+    }
+  ]
+}
