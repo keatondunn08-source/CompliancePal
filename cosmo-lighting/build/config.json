@@ -1,11 +1,13 @@
 {
   "provider": {
-    "businessName": "[YOUR BUSINESS NAME]",
+    "businessName": "One Way Web Designs",
     "contactName": "Keaton Dunn",
     "abn": "[YOUR ABN]",
-    "email": "[YOUR EMAIL]",
-    "phone": "[YOUR PHONE]",
+    "email": "keaton.dunn@outlook.com",
+    "phone": "0434 955 607",
     "gst": "none",
+    "website": "onewaywebdesign.com",
+    "gstConfirmed": false,
     "bank": {
       "accountName": "[ACCOUNT NAME]",
       "bsb": "[BSB]",
@@ -19,15 +21,21 @@
     "contactName": "Effie Santini",
     "email": "kensington@cosmogroup.com.au",
     "phone": "(02) 9662 1517",
-    "address": ["91–93 Anzac Parade", "Kensington NSW 2033"]
+    "address": [
+      "91–93 Anzac Parade",
+      "Kensington NSW 2033"
+    ]
   },
-  "suppliers": ["Oz Lighting", "Lighting Outlet"],
+  "suppliers": [
+    "Oz Lighting",
+    "Lighting Outlet"
+  ],
   "agreement": {
     "reference": "CLK-001",
     "date": "2026-10-10",
     "offerValidDays": 30,
-    "hostingIncludedMonths": 12,
-    "governingState": "New South Wales"
+    "governingState": "Victoria",
+    "supportDays": 90
   },
   "invoice": {
     "number": "INV-CLK-001",
@@ -42,7 +50,7 @@
   "lineItems": [
     {
       "name": "Signature Website Package",
-      "invoiceDetail": "Full website rebuild. Existing Shopify checkout and payment methods retained. Website hosting included.",
+      "invoiceDetail": "Premium design with 4K hero video and photo enhancement, Shopify payment integration, SEO, AEO and GEO, contact forms, AI assistant, hosting with no monthly fee, and 90 days’ support.",
       "fee": 1200
     },
     {

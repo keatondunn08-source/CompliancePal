@@ -11,9 +11,12 @@
 
 ## Must fill before sending
 
-- [ ] Your business name, ABN, email and phone
-- [ ] Bank details: account name, BSB and account number
-- [ ] GST: are you registered? The config is set to `"gst": "none"`. If you're registered, set it to `"exclusive"` (adds 10%, total becomes $2,090) or `"inclusive"` (GST comes out of the $1,900). The title then changes to TAX INVOICE.
+Provider: One Way Web Designs, Keaton Dunn (sole trader), keaton.dunn@outlook.com, 0434 955 607, onewaywebdesign.com.
+
+- [ ] **ABN.** It isn't findable by web search, and this sandbox can't reach abr.business.gov.au.
+- [ ] **Bank details:** account name, BSB and account number.
+- [ ] **GST status.** The config says `"gst": "none"`, and the note is flagged `[CONFIRM GST STATUS]` until `"gstConfirmed": true`. If you're registered, set `"gst"` to `"exclusive"` (adds 10%, so $2,090) or `"inclusive"` (GST comes out of the $1,900). The title then becomes TAX INVOICE.
+- [ ] **Business name registration.** Your ABN is in your own name, so "One Way Web Designs" must be a registered business name (ASIC) linked to that ABN. Check that the spelling matches the registration exactly. Your website reads "onewaywebdesign" (singular).
 
 ## Confirm with Effie
 
@@ -29,10 +32,13 @@
 |---|---|---|
 | Postcode Shipping Calculator | **Included ($0)** | The notes gave no price for it |
 | "Freight cost" | Built into the Supplier Sync Agent's pricing rules | The notes gave no price for it either |
-| Hosting | Included **for 12 months** after launch, with 30 days' notice before any fee | Open-ended free hosting is an uncapped liability |
+| Signature scope | Premium design (unlimited pages, copywriting, 4K hero video, photo enhancement), Shopify payments for the life of the site, SEO/AEO/GEO, contact forms, AI assistant, 90 days' support | Keaton's list plus what onewaywebdesign.com advertises for Signature |
+| Photo enhancement | Store, team and featured product photos. Supplier catalogue images are used as supplied | An uncapped catalogue would be unbounded work |
+| Hosting | Included, no monthly fee, no time limit | Matches the "no monthly fee" promise on onewaywebdesign.com |
+| Lighthouse 100 guarantee | **Left out** | Hard to hit with a 4K hero video plus a Shopify catalogue |
 | Payment | 50% deposit within 7 days, 50% before go-live | The site is already built, so the balance is held until launch |
 | Care Plan | $50/month or $500/year, opt-in tick box, not on the invoice | Your brief: very optional, no hosting |
-| Governing law | NSW | The client is in NSW |
+| Governing law | Victoria | Your home state |
 | Offer validity | 30 days (9 November 2026) | |
 
 ## Regenerate after editing `build/config.json`

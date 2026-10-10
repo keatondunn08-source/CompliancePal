@@ -36,7 +36,7 @@ const grandTotal = P.gst === 'exclusive' ? total + gstAmount : total;
 const deposit = grandTotal * INV.depositPercent / 100;
 const balance = grandTotal - deposit;
 const gstNote = {
-  none: `No GST is charged. ${P.businessName} is not registered for GST.`,
+  none: `${P.gstConfirmed ? '' : '[CONFIRM GST STATUS] '}No GST is charged. ${P.businessName} is not registered for GST.`,
   inclusive: `All prices include GST.`,
   exclusive: `All prices exclude GST. GST of 10% is added on the invoice.`,
 }[P.gst];
@@ -110,6 +110,7 @@ function table(widths, rows, o = {}) {
   });
 }
 
+const subhead = (text) => para(text, { bold: true, color: C.accent, before: 140, after: 50, keepNext: true });
 const label = (text, o = {}) => para(text, { size: 15, bold: true, color: C.accent, spacing: 20, after: 60, ...o });
 const spacer = (after = 120) => new Paragraph({ spacing: { before: 0, after }, children: [] });
 
@@ -169,7 +170,7 @@ function buildAgreement() {
 
   const parties = table([half, half], [new TableRow({ children: [
     partyCol('PROVIDER  —  “WE”, “US”', [
-      P.businessName, P.contactName, `ABN ${P.abn}`, P.email, P.phone,
+      P.businessName, `${P.contactName}, sole trader`, `ABN ${P.abn}`, P.email, P.phone, P.website,
     ]),
     partyCol('CLIENT  —  “YOU”', [
       CL.legalName, `trading as ${CL.tradingName}`, `ABN ${CL.abn}`,
@@ -180,7 +181,7 @@ function buildAgreement() {
   // Scope table
   const W = [2500, 5538, 1600];
   const scopeDetail = {
-    'Signature Website Package': 'Your new website, designed and built for Cosmo Lighting Kensington. Includes your full lighting and spare-parts range, your existing Shopify checkout and payment methods, a mobile-friendly and search-friendly build, website hosting (see section 4) and launch support.',
+    'Signature Website Package': 'Your new website, designed and built for Cosmo Lighting Kensington: premium design with a 4K hero video, Shopify payment integration, SEO, AEO and GEO, contact forms, an AI assistant, hosting with no monthly fee and 90 days’ support. Full details in section 3.',
     'Supplier Sync Agent': `An automated agent that watches ${cfg.suppliers.join(' and ')} and keeps your website up to date: live prices, new and discontinued products, and in-stock / out-of-stock status. Your pricing rules include supplier freight costs, so freight increases flow into your prices instead of coming out of your margin.`,
     'Postcode Shipping Calculator': 'Customers enter their postcode and see an Australia Post delivery cost before they pay, so freight is never under-charged at checkout.',
     'Google Business Profile Optimisation': 'A full review and update of your Google Business Profile: categories, hours, description, products, photos and a simple way to ask customers for reviews.',
@@ -209,7 +210,7 @@ function buildAgreement() {
     cell(para(''), { width: 120, fill: C.accent, margins: { top: 0, bottom: 0, left: 0, right: 0 } }),
     cell([
       label('COMPLETELY OPTIONAL  —  YOU DO NOT NEED THIS', { after: 80 }),
-      para('Your website, hosting and Supplier Sync Agent all work without the Care Plan. It’s simply there if you’d rather we look after small updates for you.', { after: 120 }),
+      para('Your website, hosting, Supplier Sync Agent and AI assistant all work without the Care Plan. It’s simply there if you’d rather we look after small updates for you.', { after: 120 }),
       para([{ t: `${money(CARE.monthly).replace('.00', '')} per month`, bold: true, size: 24 }, { t: '   or   ', color: C.muted, size: 20 }, { t: `${money(CARE.annual).replace('.00', '')} per year`, bold: true, size: 24 }, { t: '   (two months free)', color: C.muted, size: 19 }], { after: 140 }),
       para('What it covers', { bold: true, after: 40 }),
       bullet('updating product and store photos;'),
@@ -218,7 +219,7 @@ function buildAgreement() {
       para('What it does not cover', { bold: true, after: 40 }),
       bullet([{ t: 'Hosting. ', bold: true }, 'Hosting is already included in your Signature Website Package. The Care Plan is not a hosting fee.']),
       bullet('New pages, new features or redesign work (quoted separately).', { after: 120 }),
-      para('Join, change or cancel any time with 30 days’ written notice. Annual plans are paid upfront, aren’t refunded part-way through the year, and only renew if you ask us to. Tick your choice in section 10 — choosing “No thanks” changes nothing else in this agreement.', { size: 18, color: C.muted, after: 0 }),
+      para('Join, change or cancel any time with 30 days’ written notice. Annual plans are paid upfront, aren’t refunded part-way through the year, and only renew if you ask us to. Tick your choice in section 11 — choosing “No thanks” changes nothing else in this agreement.', { size: 18, color: C.muted, after: 0 }),
     ], { width: CONTENT_W - 120, fill: C.fillAccent, margins: { top: 200, bottom: 200, left: 260, right: 260 } }),
   ] })]);
 
@@ -259,27 +260,48 @@ function buildAgreement() {
     table(W, scopeRows),
     spacer(80),
     para(gstNote, { size: 18, color: C.muted, after: 60 }),
-    para('Not included: the optional Care Plan (section 3), third-party subscriptions (section 4) and any work outside this table, which we’ll quote in writing before starting.', { size: 18, color: C.muted }),
+    para('Not included: the optional Care Plan (section 4), third-party subscriptions (section 5) and any work outside sections 2 and 3, which we’ll quote in writing before starting.', { size: 18, color: C.muted }),
 
-    heading('3', 'Optional Care Plan'),
+    heading('3', 'Your Signature Website Package in detail'),
+    para(`Everything below is included in the ${money(cfg.lineItems[0].fee)} Signature Website Package fee.`, { color: C.muted }),
+    subhead('Premium design'),
+    bullet('Custom premium design for Cosmo Lighting Kensington, with unlimited pages and copywriting.'),
+    bullet('4K hero video, produced in 4K and delivered in sizes that load quickly on phones and slower connections.'),
+    bullet('Premium photo enhancement for your store, team and featured product photos. Product images that come through from your suppliers are used as supplied.'),
+    bullet('A fast, mobile-friendly build.'),
+    subhead('Payments and shop'),
+    bullet('Shopify checkout and Shop Pay integration, keeping your existing payment methods.'),
+    bullet('Included for the life of your website: no setup fee and no ongoing integration fee from us. Shopify’s own plan and payment-processing fees are paid by you to Shopify (section 5).'),
+    subhead('Search: SEO, AEO and GEO'),
+    bullet([{ t: 'SEO. ', bold: true }, 'The same SEO system we use on our own website: page titles, descriptions, structured data, sitemap and product markup, kept current automatically as your range changes.']),
+    bullet([{ t: 'AEO (answer engine optimisation). ', bold: true }, 'Content structured so Google and voice assistants can quote your answers directly, for example in featured snippets and “People also ask”.']),
+    bullet([{ t: 'GEO (generative engine optimisation). ', bold: true }, 'Your business information structured so AI tools such as ChatGPT, Google AI Overviews and Perplexity can understand and recommend Cosmo Lighting.']),
+    subhead('Customer contact'),
+    bullet('Contact and enquiry forms, sent straight to your inbox.'),
+    bullet('An AI assistant that answers customer questions and takes enquiries around the clock (see section 8).'),
+    subhead('Hosting and support'),
+    bullet('Hosting with no monthly fee from us (section 5).'),
+    bullet(`Launch and go-live support, plus ${AG.supportDays} days of support after launch (section 9).`),
+
+    heading('4', 'Optional Care Plan'),
     careBox,
 
-    heading('4', 'Hosting'),
-    bullet(`Hosting of your website is included in the Signature Website Package for the first ${AG.hostingIncludedMonths} months after launch. At least 30 days before that period ends, we’ll confirm in writing whether any hosting fee applies from then on. You’re free to move your website to another provider at any time.`),
+    heading('5', 'Hosting'),
+    bullet('Hosting is included in the Signature Website Package, with no monthly fee from us. You’re free to move your website to another provider at any time.'),
     bullet('Hosting doesn’t include third-party services, which you keep paying for directly:', { after: 40 }),
-    bullet('your Shopify plan and any paid Shopify apps;', { level: 1, after: 40 }),
+    bullet('your Shopify plan, Shopify’s payment-processing fees and any paid Shopify apps;', { level: 1, after: 40 }),
     bullet('your domain name renewal and email accounts;', { level: 1, after: 40 }),
     bullet('your Australia Post account and postage; and', { level: 1, after: 40 }),
     bullet('Shopify’s carrier-calculated shipping feature, which the Postcode Shipping Calculator needs. Depending on your Shopify plan this may be included or cost extra each month. We’ll confirm which before launch, and nothing extra is added without your approval.', { level: 1 }),
 
-    heading('5', 'Payment'),
+    heading('6', 'Payment'),
     bullet([{ t: 'Deposit: ', bold: true }, `${INV.depositPercent}% (${money(deposit)}) to start work, due within ${INV.depositDueDays} days of signing.`]),
     bullet([{ t: 'Balance: ', bold: true }, `${100 - INV.depositPercent}% (${money(balance)}) due on completion, before the new website goes live on your domain.`]),
     bullet('Payment is by bank transfer to the account shown on the invoice.'),
     bullet('If you choose the Care Plan, it’s invoiced separately.'),
     bullet('If a payment is more than 14 days overdue, we may pause work until it’s paid.'),
 
-    heading('6', 'What we need from you'),
+    heading('7', 'What we need from you'),
     bullet('Staff access to your Shopify admin, your domain settings and your Google Business Profile.'),
     bullet(`Logins or data feeds for ${cfg.suppliers.join(' and ')}, and your confirmation that each supplier allows its price and stock data to be used this way.`),
     bullet('Your pricing rules: markup by supplier or category, how freight should be added, and how prices are rounded (for example, ending in .95).'),
@@ -287,29 +309,30 @@ function buildAgreement() {
     bullet('Your Australia Post business account details (MyPost Business or eParcel), if you have one.'),
     bullet('Feedback and approvals within 5 business days, so the project keeps moving.'),
 
-    heading('7', 'Supplier data, pricing and delivery'),
+    heading('8', 'Automation, pricing and delivery'),
     bullet([{ t: 'Supplier data. ', bold: true }, 'The Supplier Sync Agent can only be as accurate as the data your suppliers publish. If a supplier’s data is wrong or late, your website may be too.']),
     bullet([{ t: 'Safety limit. ', bold: true }, 'Any price change bigger than an agreed limit (we suggest 20%) is held for your approval instead of going live automatically.']),
     bullet([{ t: 'Your prices. ', bold: true }, 'You set the pricing rules and remain responsible for the prices and stock shown on your website.']),
     bullet([{ t: 'Supplier changes. ', bold: true }, 'If a supplier changes its website, data feed or terms in a way that stops the agent working, we’ll let you know and quote the fix before doing any work.']),
     bullet([{ t: 'Australia Post limits. ', bold: true }, 'Australia Post won’t carry parcels over 22 kg or longer than 105 cm. Larger items, such as long battens, large pendants and ceiling fans, will show a delivery option you choose: flat-rate freight, “we’ll contact you with a quote”, or in-store pickup.']),
+    bullet([{ t: 'AI assistant. ', bold: true }, 'The assistant answers from your website’s information and can make mistakes, so it won’t confirm prices, stock or delivery promises on its own. Those come from your checkout or your team. Normal customer use is included. If use grows far beyond what’s typical for a store your size, we’ll talk with you before anything changes.']),
 
-    heading('8', 'Timeline, changes and support'),
-    bullet('We’ll agree a launch date once the deposit is paid and we have the access listed in section 6.'),
-    bullet('Reasonable revisions during the build are included. Anything outside section 2 will be quoted in writing before we start.'),
-    bullet('For 30 days after launch, we’ll fix any bugs in the work we delivered at no charge.'),
+    heading('9', 'Timeline, changes and support'),
+    bullet('We’ll agree a launch date once the deposit is paid and we have the access listed in section 7.'),
+    bullet('Reasonable revisions during the build are included. Anything outside sections 2 and 3 will be quoted in writing before we start.'),
+    bullet(`For ${AG.supportDays} days after launch, we’ll fix bugs and help with questions and small tweaks at no charge.`),
 
-    heading('9', 'General terms'),
-    bullet([{ t: 'Ownership. ', bold: true }, 'Once you’ve paid in full, you own your website’s design, content and data. We keep ownership of our own tools, code and know-how (including the agent software) and give you an ongoing licence to use them as part of your website.']),
+    heading('10', 'General terms'),
+    bullet([{ t: 'Ownership. ', bold: true }, 'Once you’ve paid in full, you own your website’s design, content and data, and you can use the hero video and enhanced photos across your website and marketing. We keep ownership of our own tools, code and know-how (including the agent and AI assistant software) and give you an ongoing licence to use them as part of your website.']),
     bullet([{ t: 'Portfolio. ', bold: true }, 'We may show your website in our portfolio unless you ask us not to.']),
-    bullet([{ t: 'Google. ', bold: true }, 'We can’t guarantee search rankings, map positions or review numbers. Google controls those.']),
-    bullet([{ t: 'Third parties. ', bold: true }, 'We’re not responsible for outages or changes made by Shopify, Australia Post, Google or your suppliers.']),
+    bullet([{ t: 'Search and AI tools. ', bold: true }, 'We can’t guarantee search rankings, map positions, review numbers or mentions in AI tools. Google and the AI providers control those.']),
+    bullet([{ t: 'Third parties. ', bold: true }, 'We’re not responsible for outages or changes made by Shopify, Australia Post, Google, AI providers or your suppliers.']),
     bullet([{ t: 'Liability. ', bold: true }, 'To the extent the law allows, our total liability under this agreement is limited to the fees you’ve paid us. Nothing in this agreement limits your rights under the Australian Consumer Law.']),
     bullet([{ t: 'Confidentiality. ', bold: true }, 'We keep your logins, supplier pricing and business information confidential and use them only for this project.']),
     bullet([{ t: 'Ending the agreement. ', bold: true }, 'Either of us can end this agreement by written notice. You pay for work completed up to that date, and the deposit covers work already started.']),
     bullet([{ t: 'Law. ', bold: true }, `This agreement is governed by the laws of ${AG.governingState}.`]),
 
-    heading('10', 'Acceptance', { pageBreakBefore: true }),
+    heading('11', 'Acceptance', { pageBreakBefore: true }),
     para(`This offer is valid until ${fmtDate(validUntil)}. By signing, you accept this agreement and the fees in section 2.`, { after: 160, keepNext: true }),
     para('Optional Care Plan — tick one', { bold: true, after: 100, keepNext: true }),
     tick('No thanks, not right now', 'You can join any time.'),
@@ -351,7 +374,8 @@ function buildInvoice() {
       para(P.businessName, { size: 30, bold: true, after: 60 }),
       para(P.contactName, { size: 18, color: C.muted, after: 20 }),
       para(`ABN ${P.abn}`, { size: 18, color: C.muted, after: 20 }),
-      para(`${P.email}  ·  ${P.phone}`, { size: 18, color: C.muted, after: 0 }),
+      para(`${P.email}  ·  ${P.phone}`, { size: 18, color: C.muted, after: 20 }),
+      para(P.website, { size: 18, color: C.muted, after: 0 }),
     ], { width: 5838, margins: { top: 0, bottom: 0, left: 0, right: 0 } }),
     cell([
       para(title, { size: 40, bold: true, color: C.accent, after: 120, align: AlignmentType.RIGHT, spacing: 30 }),
@@ -435,9 +459,9 @@ function buildInvoice() {
 
   const children = [
     top,
-    spacer(200),
+    spacer(160),
     billTo,
-    spacer(200),
+    spacer(180),
     items,
     spacer(40),
     totals,
@@ -445,8 +469,8 @@ function buildInvoice() {
     schedule,
     spacer(200),
     payBox,
-    spacer(160),
-    para([{ t: 'Optional Care Plan: ', bold: true }, `not part of this invoice. The ${money(CARE.monthly).replace('.00', '')}/month or ${money(CARE.annual).replace('.00', '')}/year Care Plan is entirely optional and does not include hosting, which is already included in your Signature Website Package. See section 3 of your agreement.`], { size: 17, color: C.muted, after: 60 }),
+    spacer(140),
+    para([{ t: 'Optional Care Plan: ', bold: true }, `not part of this invoice. It’s entirely optional (${money(CARE.monthly).replace('.00', '')}/month or ${money(CARE.annual).replace('.00', '')}/year) and doesn’t include hosting. See section 4 of your agreement.`], { size: 17, color: C.muted, after: 60 }),
     para(`${gstNote}  Thank you for choosing ${P.businessName}.`, { size: 17, color: C.muted, after: 0 }),
   ];
 
