@@ -2,12 +2,12 @@
   "provider": {
     "businessName": "One Way Web Designs",
     "contactName": "Keaton Dunn",
-    "abn": "[YOUR ABN]",
-    "email": "keaton.dunn@outlook.com",
+    "abn": "99 772 930 609",
+    "email": "keaton.dunn08@gmail.com",
     "phone": "0434 955 607",
     "gst": "none",
     "website": "onewaywebdesign.com",
-    "gstConfirmed": false,
+    "gstConfirmed": true,
     "bank": {
       "accountName": "[ACCOUNT NAME]",
       "bsb": "[BSB]",
@@ -51,22 +51,20 @@
     {
       "name": "Signature Website Package",
       "invoiceDetail": "Premium design with 4K hero video and photo enhancement, Shopify payment integration, SEO, AEO and GEO, contact forms, AI assistant, hosting with no monthly fee, and 90 days’ support.",
-      "fee": 1200
+      "fee": 1200,
+      "agreementDetail": "Your new website, designed and built for Cosmo Lighting Kensington: premium design with a 4K hero video, Shopify payment integration, SEO, AEO and GEO, contact forms, an AI assistant, hosting with no monthly fee and 90 days’ support. Full details in section 3."
     },
     {
-      "name": "Supplier Sync Agent",
-      "invoiceDetail": "Live pricing, product range and stock status from Oz Lighting and Lighting Outlet, with freight costs built into your pricing rules.",
-      "fee": 500
-    },
-    {
-      "name": "Postcode Shipping Calculator",
-      "invoiceDetail": "Australia Post delivery cost calculated automatically from the customer’s postcode.",
-      "fee": 0
+      "name": "Supplier Sync Agent + Postcode Shipping Calculator",
+      "invoiceDetail": "Live pricing, product range and stock status from Oz Lighting and Lighting Outlet, with freight built into your pricing, plus Australia Post delivery costs calculated from the customer’s postcode.",
+      "agreementDetail": "An automated agent that watches Oz Lighting and Lighting Outlet and keeps your website up to date: live prices, new and discontinued products, and in-stock / out-of-stock status. Your pricing rules include supplier freight costs, so freight increases flow into your prices instead of coming out of your margin. Includes the Postcode Shipping Calculator: customers enter their postcode and see an Australia Post delivery cost before they pay.",
+      "fee": 600
     },
     {
       "name": "Google Business Profile Optimisation",
       "invoiceDetail": "Full review and update of your Google Business Profile.",
-      "fee": 200
+      "fee": 200,
+      "agreementDetail": "A full review and update of your Google Business Profile: categories, hours, description, products, photos and a simple way to ask customers for reviews."
     }
   ]
 }

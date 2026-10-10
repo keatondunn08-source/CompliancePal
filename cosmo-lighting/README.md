@@ -3,19 +3,17 @@
 | File | What it is |
 |---|---|
 | `Cosmo-Lighting-Website-Agreement.docx` / `.pdf` | Website Services Agreement: Signature Website Package plus add-ons, the optional Care Plan, and signatures |
-| `Cosmo-Lighting-Invoice-INV-CLK-001.docx` / `.pdf` | Invoice for $1,900.00. The 50% deposit ($950.00) is due 7 days after issue. |
+| `Cosmo-Lighting-Invoice-INV-CLK-001.docx` / `.pdf` | Invoice for $2,000.00. The 50% deposit ($1,000.00) is due 7 days after issue. |
 | `build/config.json` | Every name, price, date and placeholder in both documents |
 | `build/build-docs.js` | Generates both `.docx` files from the config |
 
-**Don't send these yet.** Anything still to fill in is highlighted yellow in `[CAPS]`.
+**Don't send these yet.** Bank details are the only placeholders left, highlighted yellow in `[CAPS]`.
 
 ## Must fill before sending
 
-Provider: One Way Web Designs, Keaton Dunn (sole trader), keaton.dunn@outlook.com, 0434 955 607, onewaywebdesign.com.
+Provider: One Way Web Designs, Keaton Dunn (sole trader), ABN 99 772 930 609 (passes the ATO checksum), keaton.dunn08@gmail.com, 0434 955 607, onewaywebdesign.com. Not registered for GST.
 
-- [ ] **ABN.** It isn't findable by web search, and this sandbox can't reach abr.business.gov.au.
 - [ ] **Bank details:** account name, BSB and account number.
-- [ ] **GST status.** The config says `"gst": "none"`, and the note is flagged `[CONFIRM GST STATUS]` until `"gstConfirmed": true`. If you're registered, set `"gst"` to `"exclusive"` (adds 10%, so $2,090) or `"inclusive"` (GST comes out of the $1,900). The title then becomes TAX INVOICE.
 - [ ] **Business name registration.** Your ABN is in your own name, so "One Way Web Designs" must be a registered business name (ASIC) linked to that ABN. Check that the spelling matches the registration exactly. Your website reads "onewaywebdesign" (singular).
 
 ## Confirm with Effie
@@ -30,8 +28,8 @@ Provider: One Way Web Designs, Keaton Dunn (sole trader), keaton.dunn@outlook.co
 
 | Item | Default used | Why |
 |---|---|---|
-| Postcode Shipping Calculator | **Included ($0)** | The notes gave no price for it |
-| "Freight cost" | Built into the Supplier Sync Agent's pricing rules | The notes gave no price for it either |
+| Supplier Sync Agent + Postcode Shipping Calculator | One line item, $600 | Keaton's pricing |
+| "Freight cost" | Built into the Supplier Sync Agent's pricing rules | The notes gave no price for it |
 | Signature scope | Premium design (unlimited pages, copywriting, 4K hero video, photo enhancement), Shopify payments for the life of the site, SEO/AEO/GEO, contact forms, AI assistant, 90 days' support | Keaton's list plus what onewaywebdesign.com advertises for Signature |
 | Photo enhancement | Store, team and featured product photos. Supplier catalogue images are used as supplied | An uncapped catalogue would be unbounded work |
 | Hosting | Included, no monthly fee, no time limit | Matches the "no monthly fee" promise on onewaywebdesign.com |

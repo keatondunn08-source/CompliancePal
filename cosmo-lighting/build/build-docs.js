@@ -180,12 +180,6 @@ function buildAgreement() {
 
   // Scope table
   const W = [2500, 5538, 1600];
-  const scopeDetail = {
-    'Signature Website Package': 'Your new website, designed and built for Cosmo Lighting Kensington: premium design with a 4K hero video, Shopify payment integration, SEO, AEO and GEO, contact forms, an AI assistant, hosting with no monthly fee and 90 days’ support. Full details in section 3.',
-    'Supplier Sync Agent': `An automated agent that watches ${cfg.suppliers.join(' and ')} and keeps your website up to date: live prices, new and discontinued products, and in-stock / out-of-stock status. Your pricing rules include supplier freight costs, so freight increases flow into your prices instead of coming out of your margin.`,
-    'Postcode Shipping Calculator': 'Customers enter their postcode and see an Australia Post delivery cost before they pay, so freight is never under-charged at checkout.',
-    'Google Business Profile Optimisation': 'A full review and update of your Google Business Profile: categories, hours, description, products, photos and a simple way to ask customers for reviews.',
-  };
   const headCell = (t, w, align) => cell(para(t, { size: 16, bold: true, color: C.white, after: 0, spacing: 20, align }), { width: w, fill: C.ink });
   const rowBorder = { bottom: LINE };
   const scopeRows = [
@@ -195,7 +189,7 @@ function buildAgreement() {
       const m = { top: 90, bottom: 90, left: 150, right: 150 };
       return new TableRow({ cantSplit: true, children: [
         cell(para(item.name, { bold: true, after: 0, keepNext }), { width: W[0], borders: rowBorder, margins: m }),
-        cell(para(scopeDetail[item.name] || item.invoiceDetail, { size: 19, after: 0, keepNext }), { width: W[1], borders: rowBorder, margins: m }),
+        cell(para(item.agreementDetail || item.invoiceDetail, { size: 19, after: 0, keepNext }), { width: W[1], borders: rowBorder, margins: m }),
         cell(para(item.fee ? money(item.fee) : 'Included', { bold: true, after: 0, keepNext, align: AlignmentType.RIGHT }), { width: W[2], borders: rowBorder, margins: m }),
       ] });
     }),
