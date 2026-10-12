@@ -1,0 +1,28 @@
+{
+  "extent": 7000,
+  "terrain": { "step": 8, "exaggeration": 1.5 },
+  "waterY": -4,
+  "areas": [
+    {
+      "id": "byron-bay",
+      "name": "Byron Bay",
+      "suburbs": ["Byron Bay", "Suffolk Park", "Bangalow", "Mullumbimby"],
+      "camera": { "path": [[153.6060, -28.6452], [153.6180, -28.6432]], "pitch": 30, "dist": 1100, "yaw": 0 },
+      "sun": [292, 21]
+    },
+    {
+      "id": "tweed-heads",
+      "name": "Tweed Heads",
+      "suburbs": ["Tweed Heads", "Kingscliff", "Pottsville", "Coolangatta"],
+      "camera": { "path": [[153.5315, -28.1905], [153.5385, -28.1835]], "pitch": 31, "dist": 1050, "yaw": 0 },
+      "sun": [300, 22]
+    },
+    {
+      "id": "murwillumbah",
+      "name": "Murwillumbah",
+      "suburbs": ["Murwillumbah", "Tweed Valley", "Uki", "Tumbulgum"],
+      "camera": { "path": [[153.4045, -28.3228], [153.3945, -28.3272]], "pitch": 32, "dist": 1100, "yaw": 0 },
+      "sun": [70, 24]
+    }
+  ]
+}
