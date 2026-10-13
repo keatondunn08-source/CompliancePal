@@ -91,6 +91,7 @@ function head({ path, title, description, preload = '', jsonld = [] }) {
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/atkinson-next-var.woff2" as="font" type="font/woff2" crossorigin>
 ${preload}  <link rel="stylesheet" href="/assets/css/site.css?v=${hash('assets/css/site.css')}">
   <script type="module" src="/assets/js/site.js?v=${hash('assets/js/site.js')}"></script>
 ${jsonld.length ? `  <script type="application/ld+json">${JSON.stringify(graph)}</script>\n` : ''}</head>`;

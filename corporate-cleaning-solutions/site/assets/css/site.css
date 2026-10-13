@@ -7,13 +7,13 @@
   src: url('/assets/fonts/archivo-var.woff2') format('woff2');
   font-weight: 500 800;
   font-stretch: 100% 125%;
-  font-display: swap;
+  font-display: optional; /* preloaded; no late swap, so no layout shift */
 }
 @font-face {
   font-family: 'Atkinson Next';
   src: url('/assets/fonts/atkinson-next-var.woff2') format('woff2');
   font-weight: 300 800;
-  font-display: swap;
+  font-display: optional; /* preloaded; no late swap, so no layout shift */
 }
 /* Metric-matched fallbacks keep text from re-wrapping when the web fonts arrive.
    size-adjust = measured width of Archivo (at the stretch used) / Arial, averaged over real headings;
@@ -255,7 +255,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background:
     linear-gradient(to top, rgba(18, 23, 42, .94) 0%, rgba(18, 23, 42, .62) 34%, rgba(18, 23, 42, .12) 66%, rgba(18, 23, 42, .4) 100%),
-    linear-gradient(to right, rgba(18, 23, 42, .55), rgba(18, 23, 42, 0) 62%);
+    linear-gradient(to right, rgba(18, 23, 42, .72), rgba(18, 23, 42, .5) 40%, rgba(18, 23, 42, 0) 72%);
 }
 
 /* Phones: the map (or footage) gets a clear window across the top, and the headline sits

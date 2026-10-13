@@ -155,7 +155,7 @@ export const regions = [
     long: 'Albion, Ascot, Hamilton, Clayfield and Hendra',
     suburbs: ['Albion', 'Ascot', 'Hamilton', 'Clayfield', 'Hendra'],
     title: 'Commercial, School & Builders’ Cleaning in Ascot, Hamilton & Clayfield',
-    h1: 'Commercial, school and builders’ cleaning in Ascot, Hamilton and Clayfield',
+    h1: 'School, builders’ and commercial cleaning on the inner northside',
     description: 'Builders’ cleans, private school cleaning and commercial cleaning in Albion, Ascot, Hamilton, Clayfield and Hendra.',
     lede: 'Brisbane’s racing suburbs. Eagle Farm and Doomben racecourses sit in Ascot, and Racecourse Road runs down to the river at Hamilton.',
     copy: [
@@ -177,7 +177,7 @@ export const regions = [
     long: 'East Brisbane, Coorparoo, Greenslopes, Camp Hill and Carina',
     suburbs: ['East Brisbane', 'Coorparoo', 'Greenslopes', 'Camp Hill', 'Carina'],
     title: 'School & Commercial Cleaning in Coorparoo, Camp Hill & Brisbane’s East',
-    h1: 'School and commercial cleaning in Coorparoo, Camp Hill and Brisbane’s east',
+    h1: 'School and commercial cleaning in Brisbane’s east',
     description: 'Private school, commercial and body corporate cleaning in East Brisbane, Coorparoo, Greenslopes, Camp Hill and Carina.',
     lede: 'The east runs out along Old Cleveland Road and Logan Road, with schools, medical practices and shopping strips the whole way.',
     copy: [

@@ -77,6 +77,8 @@ I couldn't open his current site from the build environment (the network policy 
   - **Portrait 720×1280** goes to phones.
   - WebM/VP9 is used where supported, with MP4/H.264 as the fallback.
 - **The LCP element is the headline**, not the hero image. Chrome ignores full-viewport images for LCP, so the hero image loads at `fetchpriority="low"`. It never competes with the fonts and CSS, and the frost covers it while it arrives.
+- **Phones:** the footage or map gets a clear window across the top 44% of the screen, and the headline sits below it on solid ink.
+- **Fonts:** both are preloaded and use `font-display: optional`. There's no late swap, so no layout shift. On a very slow first visit, the fallback font stays for that page.
 - **Pausing:** plays only while the hero is on screen and the tab is visible. It has a pause button (WCAG 2.2.2).
 - **Reduced motion and Save-Data:** no wipe, no tour, and the hero starts paused on a still.
 
