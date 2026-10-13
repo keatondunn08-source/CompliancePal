@@ -1,0 +1,14 @@
+{
+  "name": "ccs-verify",
+  "private": true,
+  "type": "module",
+  "description": "Local verification: static server, screenshots, Lighthouse. Not deployed.",
+  "scripts": {
+    "serve": "serve -l 8080 ../../site"
+  },
+  "dependencies": {
+    "lighthouse": "12.8.2",
+    "playwright": "^1.56.1",
+    "serve": "^14.2.4"
+  }
+}
