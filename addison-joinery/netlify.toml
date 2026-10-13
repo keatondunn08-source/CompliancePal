@@ -2,6 +2,9 @@
 # In Netlify: set the base directory to "addison-joinery" (this folder).
 [build]
   publish = "site"
+  # Only build when this site's output or config changed (a shared repo otherwise spends
+  # 15 production-deploy credits on every unrelated push). Deploy with scripts/netlify-deploy.sh.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- site netlify.toml"
 
 [[headers]]
   for = "/*"
