@@ -1,0 +1,23 @@
+{
+  "_help": "One entry per area that has real footage. source: a direct file URL or a path relative to this folder. start/duration in seconds (duration + 1 s must fit in the master). portraitX: 0 = crop phones to the left of the frame, 1 = right. caption: what the clip actually shows, in plain words; it appears on the page. credit: shown in the site footer.",
+  "clips": [
+    {
+      "area": "cbd-valley",
+      "source": "",
+      "start": 0,
+      "duration": 8,
+      "portraitX": 0.5,
+      "caption": "",
+      "credit": { "title": "", "author": "", "source": "", "url": "", "license": "" }
+    },
+    {
+      "area": "south-brisbane",
+      "source": "",
+      "start": 0,
+      "duration": 8,
+      "portraitX": 0.5,
+      "caption": "",
+      "credit": { "title": "", "author": "", "source": "", "url": "", "license": "" }
+    }
+  ]
+}

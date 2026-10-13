@@ -1,0 +1,13 @@
+{
+  "name": "ccs-map-renderer",
+  "private": true,
+  "type": "module",
+  "description": "Rasterises the night-map SVGs built by build_maps.py with headless Chromium.",
+  "scripts": {
+    "fetch": "python3 fetch.py",
+    "build": "python3 build_maps.py"
+  },
+  "dependencies": {
+    "playwright-core": "1.56.1"
+  }
+}

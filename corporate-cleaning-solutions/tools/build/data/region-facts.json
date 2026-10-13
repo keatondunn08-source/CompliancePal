@@ -1,0 +1,151 @@
+{
+  "_about": {
+    "source": "Overture Maps Foundation release 2026-09-23.1 (divisions, buildings, base water); data © OpenStreetMap contributors and others, ODbL / CDLA-Permissive-2.0.",
+    "base": {
+      "lngLat": [
+        153.027888,
+        -27.535322
+      ],
+      "method": "street-midpoint",
+      "matched": "Bracken Street, Moorooka"
+    },
+    "buildingCount": "Overture building footprints (not underground) whose centroid lies inside the region polygon.",
+    "kmFromBase": "Haversine distance from the base to the region's area-weighted centroid.",
+    "areaKm2": "Area of the union of the region's suburb polygons (WGS84 equal-area).",
+    "riverFrontageKm": "Length of the region boundary within 50 m of Brisbane River water polygons."
+  },
+  "cbd-valley": {
+    "name": "CBD & Valley",
+    "suburbs": [
+      "Brisbane City",
+      "Spring Hill",
+      "Fortitude Valley",
+      "Newstead",
+      "Bowen Hills"
+    ],
+    "matchedNames": {
+      "Brisbane City": "Brisbane City",
+      "Spring Hill": "Spring Hill",
+      "Fortitude Valley": "Fortitude Valley",
+      "Newstead": "Newstead",
+      "Bowen Hills": "Bowen Hills"
+    },
+    "unmatched": [],
+    "buildingCount": 3247,
+    "kmFromBase": 8.6,
+    "areaKm2": 7.8,
+    "riverFrontageKm": 6.8
+  },
+  "southside": {
+    "name": "Southside",
+    "suburbs": [
+      "Moorooka",
+      "Annerley",
+      "Yeronga",
+      "Tarragindi",
+      "Salisbury",
+      "Rocklea"
+    ],
+    "matchedNames": {
+      "Moorooka": "Moorooka",
+      "Annerley": "Annerley",
+      "Yeronga": "Yeronga",
+      "Tarragindi": "Tarragindi",
+      "Salisbury": "Salisbury",
+      "Rocklea": "Rocklea"
+    },
+    "unmatched": [],
+    "buildingCount": 20727,
+    "kmFromBase": 0.7,
+    "areaKm2": 28.8,
+    "riverFrontageKm": 4.7
+  },
+  "south-brisbane": {
+    "name": "South Brisbane & Gabba",
+    "suburbs": [
+      "South Brisbane",
+      "West End",
+      "Highgate Hill",
+      "Woolloongabba",
+      "Kangaroo Point"
+    ],
+    "matchedNames": {
+      "South Brisbane": "South Brisbane",
+      "West End": "West End",
+      "Highgate Hill": "Highgate Hill",
+      "Woolloongabba": "Woolloongabba",
+      "Kangaroo Point": "Kangaroo Point"
+    },
+    "unmatched": [],
+    "buildingCount": 7745,
+    "kmFromBase": 5.8,
+    "areaKm2": 10.2,
+    "riverFrontageKm": 11.8
+  },
+  "western-suburbs": {
+    "name": "Western Suburbs",
+    "suburbs": [
+      "Toowong",
+      "Auchenflower",
+      "St Lucia",
+      "Taringa",
+      "Indooroopilly"
+    ],
+    "matchedNames": {
+      "Toowong": "Toowong",
+      "Auchenflower": "Auchenflower",
+      "St Lucia": "St Lucia",
+      "Taringa": "Taringa",
+      "Indooroopilly": "Indooroopilly"
+    },
+    "unmatched": [],
+    "buildingCount": 12820,
+    "kmFromBase": 5.9,
+    "areaKm2": 20.2,
+    "riverFrontageKm": 15.7
+  },
+  "northside": {
+    "name": "Northside",
+    "suburbs": [
+      "Albion",
+      "Ascot",
+      "Hamilton",
+      "Clayfield",
+      "Hendra"
+    ],
+    "matchedNames": {
+      "Albion": "Albion",
+      "Ascot": "Ascot",
+      "Hamilton": "Hamilton",
+      "Clayfield": "Clayfield",
+      "Hendra": "Hendra"
+    },
+    "unmatched": [],
+    "buildingCount": 10235,
+    "kmFromBase": 12.4,
+    "areaKm2": 12.9,
+    "riverFrontageKm": 4.7
+  },
+  "eastside": {
+    "name": "Eastside",
+    "suburbs": [
+      "East Brisbane",
+      "Coorparoo",
+      "Greenslopes",
+      "Camp Hill",
+      "Carina"
+    ],
+    "matchedNames": {
+      "East Brisbane": "East Brisbane",
+      "Coorparoo": "Coorparoo",
+      "Greenslopes": "Greenslopes",
+      "Camp Hill": "Camp Hill",
+      "Carina": "Carina"
+    },
+    "unmatched": [],
+    "buildingCount": 17538,
+    "kmFromBase": 6.2,
+    "areaKm2": 19.1,
+    "riverFrontageKm": 1.2
+  }
+}

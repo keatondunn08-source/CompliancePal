@@ -1,0 +1,117 @@
+# Corporate Cleaning Solutions website
+
+A static marketing site for [Corporate Cleaning Solutions (Qld) Pty Ltd](https://corporatecleaningsolutions.com.au/), a family-run Brisbane cleaning contractor based in Moorooka. It covers private school cleaning, builders' handover cleans, and commercial and body corporate cleaning.
+
+- **14 pages:** home, three service pages, an areas hub, six area pages, contact, thank-you and 404.
+- **Home hero:** a tour of all six service areas, each with its own page. Areas with real aerial footage play it, cut down to a seamless loop and served in 4K to screens that can show it. Every other area shows a night map drawn from real Brisbane map data.
+- **Load animation:** on every page, a squeegee wipes a pane of fogged glass off the hero.
+
+```
+corporate-cleaning-solutions/
+├── site/                     ← the website (deploy this folder)
+│   ├── index.html, */index.html, 404.html   ← generated, committed
+│   ├── sitemap.xml, robots.txt              ← generated, committed
+│   └── assets/
+│       ├── css/site.css      ← hand-written
+│       ├── js/site.js        ← hero tour, nav, quote form, regions map
+│       ├── fonts/            ← Archivo + Atkinson Hyperlegible Next (subset, self-hosted, OFL)
+│       ├── img/map/          ← night-map hero stills + cards (tools/maps)
+│       ├── img/footage/      ← first-frame posters for real footage (tools/footage)
+│       ├── img/brisbane-regions.svg          ← interactive regions map (generated)
+│       └── video/            ← footage tiers (tools/footage)
+├── tools/build/              ← page generator: content.mjs (all copy) + build.mjs
+├── tools/maps/               ← map pipeline (Overture Maps → stills, region geometry)
+├── tools/footage/            ← footage pipeline (licensed 4K masters → web tiers)
+└── netlify.toml
+```
+
+## Editing
+
+All copy and business details live in **`tools/build/content.mjs`**. The page templates are in **`tools/build/build.mjs`**. After editing either file, regenerate the HTML:
+
+```bash
+node tools/build/build.mjs     # Node 18+, no dependencies
+```
+
+The generated HTML is committed, so deploying needs no build step. CSS and JS are linked with a content hash (`?v=…`), so re-run the build after changing them too.
+
+## Preview locally
+
+```bash
+npx serve site           # or: npx http-server site -c-1
+```
+
+Use a server that supports HTTP range requests (`python -m http.server` doesn't), or the videos won't seek and loop.
+
+## Deploy (Netlify)
+
+1. New site from Git, pointing at this repository.
+2. **Base directory:** `corporate-cleaning-solutions`. `netlify.toml` sets the publish directory to `site` and adds the security headers (strict CSP) and cache rules.
+3. Quote requests arrive through **Netlify Forms** (form name `quote`). New sites have to enable form detection first (*Forms → Enable form detection*), then redeploy. Turn on email notifications under *Forms → Notifications* and point them at Justin. Send a test request before launch.
+
+Any static host works, but the form then needs another backend. Without one, the form shows an error that gives the phone number and email instead.
+
+## Before launch: confirm with the client
+
+I couldn't open his current site from the build environment (the network policy blocked it). Everything below came from search-engine snippets of his site and from directory listings:
+
+- [ ] **Number of schools.** His old site says 8 private schools in one place and 9 in another. The new site says **nine** (`business.schools` in `content.mjs`).
+- [ ] **Phone and email:** 0410 689 872 and justin@corporatecleaningsolutions.com.au. Yellow Pages also lists (07) 3892 7994, which isn't used on the site.
+- [ ] **Address:** 19 Bracken Street, Moorooka QLD 4105. He also has a South Brisbane PO box, which isn't used.
+- [ ] **Hours.** His old site's opening hours were garbled, so the site doesn't show any.
+- [ ] **ABN.** Add it to the footer.
+- [ ] **Logo.** The squeegee mark and wordmark are placeholders. Replace them in `build.mjs` (`mark`), `favicon.svg` and `apple-touch-icon.png`. If his brand colours aren't jacaranda purple, change the tokens at the top of `site.css`.
+- [ ] **Testimonials.** His old site had a testimonials page I couldn't read. The new site has no testimonials, deliberately: invented ones would breach Australian Consumer Law. Add real ones, with names and permission.
+- [ ] **Blue Card / police checks / insurance.** If his staff hold Blue Cards (working with children), say so on the schools page. School business managers look for it. The same goes for public liability insurance. The site makes no claims about any of these.
+- [ ] **Process wording.** "How a contract starts" (site walk → written scope and price → start date), the three builders'-clean stages, and the school holiday floor programme describe common practice. Check they match how he works.
+- [ ] **Naming schools.** Area pages talk about the kinds of buildings in each area, but deliberately name none of his clients. If schools agree to be named, a "schools we look after" line will do a lot for trust and local SEO.
+
+## The hero
+
+`assets/js/site.js` → `initFlyover()`:
+
+- **Slides** come from the `.flyover__tab` buttons the generator writes. Each slide is either `data-kind="video"` (real footage) or `data-kind="still"` (map). Two layers alternate: one is on screen while the other loads the next slide, then they crossfade. No more than two media elements ever exist.
+- **Video sources by screen:**
+  - **2160p** goes only to screens at least 1600 CSS px wide with about 3000+ physical pixels, on a fast connection.
+  - **1080p or 720p** goes to other landscape screens.
+  - **Portrait 720×1280** goes to phones.
+  - WebM/VP9 is used where supported, with MP4/H.264 as the fallback.
+- **The LCP element is the headline**, not the hero image. Chrome ignores full-viewport images for LCP, so the hero image loads at `fetchpriority="low"`. It never competes with the fonts and CSS, and the frost covers it while it arrives.
+- **Pausing:** plays only while the hero is on screen and the tab is visible. It has a pause button (WCAG 2.2.2).
+- **Reduced motion and Save-Data:** no wipe, no tour, and the hero starts paused on a still.
+
+## Real footage (`tools/footage`)
+
+Agreed plan: free licensed 4K clips now for the areas that have them (CBD & Valley, South Brisbane & Gabba), and a commissioned drone shoot of all six areas once he signs.
+
+1. Find the clips. Good candidates are Brisbane River / Story Bridge / CBD skyline / South Bank clips on Pexels or Pixabay; both licences allow commercial use without attribution, though we credit anyway. Open each licence page and check it.
+2. Put the direct file URL (or a local path), the in/out point, an honest `caption` describing what the clip actually shows, and the `credit` into **`tools/footage/clips.json`**.
+3. Run:
+   ```bash
+   node tools/footage/encode.mjs        # all clips, about 3–4 min each (4K VP9 is slow)
+   node tools/build/build.mjs           # pages switch those areas from map to footage
+   ```
+4. The encoder cuts the clip, blends the last second into the first so it loops seamlessly, and writes these files:
+   - `video/<id>-{2160,1080,720,portrait}.{webm,mp4}`
+   - first-frame posters in `img/footage/`
+   - the area entry in `tools/build/data/footage.json`
+
+   2160p is only made when the master is genuinely 4K.
+
+**Captions must describe what's actually in the shot.** Never label CBD footage as Moorooka.
+
+**The drone shoot (for the quote).** Each area needs a 10–20 s, slow, steady, high-altitude forward or orbit move, shot in 4K/30p or better, mid-morning or golden hour, with no identifiable people up close. Moorooka/Salisbury sit near Archerfield Airport and Ascot/Hamilton/Clayfield near Brisbane Airport, so the operator must be CASA-certified (ReOC/RePL) and get the airspace approvals. Drop the masters into `clips.json` and re-run. The site needs no other change.
+
+**Build-environment note.** The cloud environment this was built in blocks Pexels/Pixabay. To let Claude fetch clips, add these to the environment's allowed domains: `pexels.com`, `www.pexels.com`, `videos.pexels.com`, `pixabay.com`, `cdn.pixabay.com`. Otherwise, download them yourself.
+
+## Maps (`tools/maps`)
+
+The night maps, the light interactive regions map and the "km from our base" facts are drawn from **Overture Maps** (OpenStreetMap and others) data. See `tools/maps/README.md` for commands. A full rebuild takes about 4 minutes. The base pin is the Bracken Street midpoint from road data.
+
+If the region geometry changes shape, update `aspect-ratio` on `.regions__map` in `site.css` to match the SVG's `viewBox` (currently `1000 / 1114`).
+
+## Credits (required, already in the footer)
+
+- Map data © OpenStreetMap contributors and the Overture Maps Foundation, ODbL 1.0 / CDLA-Permissive-2.0.
+- Fonts: Archivo (Omnibus-Type) and Atkinson Hyperlegible Next (Braille Institute), both SIL Open Font License 1.1. Licence files are in `site/assets/fonts/`.
+- Footage credits are generated from `clips.json` into the footer.

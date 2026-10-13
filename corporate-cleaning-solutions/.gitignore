@@ -1,0 +1,5 @@
+tools/maps/.cache/
+tools/maps/node_modules/
+tools/footage/.cache/
+*.log
+__pycache__/
